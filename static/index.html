@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+ 
+<html>
+<head>
+    <meta http-equiv="CACHE-CONTROL" content="public max-age=31536000">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- social media metatags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:creator" content="@alexisylchan">
+    <meta name="twitter:title" content="Starry, Starry, Memories">
+    <meta name="twitter:description" content="Add some NASA-inspiration to your photos!">
+    <meta name="twitter:image" content="/images/se4.jpg">
+    <meta property="fb:app_id" content="689572657886554" />
+    <meta property="og:url" content="http://www.starr.space" />
+    <meta property="og:title"              content="Starry, Starry, Memories" />
+    <meta property="og:description"        content="Add some NASA-inspiration to your photos!" />
+    <meta property="og:image"              content="http://www.starr.space/images/se4_med.png" />
+
+    <!-- style -->
+    <link rel="icon" type="image/png" href="/images/datanauts.png">  
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css" rel="stylesheet">    
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet' type='text/css'>
+    <link href='css/starrspace.css' rel='stylesheet' type='text/css'>
+
+    <!-- source -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha384-3ceskX3iaEnIogmQchP8opvBy3Mi7Ce34nWjpBIwVTHfGYWQS9jwHDVRnpKKHJg7" crossorigin="anonymous"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>    
+    <script src="src/config.js"></script>
+    <script src="src/oauth.js"></script>
+    <script src="src/imgutil.js"></script>
+    <script src="src/result.js"></script>
+    <script src="src/daycounter.js"></script>
+    <script src="src/facebookapi.js"></script>
+    <script src="src/twitterapi.js"></script>
+    <script src="src/tinypopup.js"></script>
+    <script src="src/resultpanel.js"></script>
+    <script src="src/pin.js"></script>
+    <script src="src/layout.js"></script>
+    <script src="src/starrspace.js"></script>
+
+
+    <!-- Google Analytics -->
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'apodstyletransfer', 'auto');
+    ga('send', 'pageview');
+    </script>
+    <!-- End Google Analytics -->
+
+    <!-- Facebook SDK -->
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : myFBId,
+          xfbml      : true,
+          version    : 'v2.8'
+        });
+        FB.AppEvents.logPageView();
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <!-- End Facebook SDK -->
+ 
+    <title>Starry, Starry Memories</title>
+</head>
+ 
+<body onload="window.start()">
+    <div class="page-container">
+    <h2 id="banner" class="nav nav-pills">
+       <img src="/images/datanauts.svg" alt="NASA Datanauts Logo" title="A NASA Datanauts Project">Starry, Starry Memories
+   </h2>
+    <div id="wrapper" class="photos visible">
+        <div id="columns">
+        </div>
+    </div>
+    <div class="modal fade" id="introDlg" tabindex="-1" role="dialog" aria-labelledby="introDlgLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                    </button>
+                    <div id="introDesc">
+                        <p><a href="/">Starr Space</a> is a 
+                        <a target="_blank" href="https://open.nasa.gov/explore/datanauts/">NASA Datanauts</a> project created by 
+                        <a target="_blank" href="https://twitter.com/alexisylchan">Alexis Chan</a> 
+                        to share her love of NASA's amazing photographs.</p>
+
+                        <p>
+                        <b>Bonus</b>: Add some NASA-inspiration to your photos!</p>
+                        <img id="style_example_img" src="/images/se3.png">
+
+                        <div style="margin: 10px 0 20px 0;">Photos with the palette icon <span class="stylizeIcon palette" style="float:none">🎨</span> can be used as inspirations!</div> 
+
+                        <p class="copyright">
+                            Here's our <a target="_blank" href="/privacy">Privacy Policy</a>.<br/>
+                            TLDR: Your photos are only used during the NASA-inspired-photo-creation, and are then immediately deleted from our server(s). We do not collect or share any personally-identifiable information or use it for profit.                            
+                        </p>
+                        <p class="copyright">All images are copyrights of their respective owners and documented at  
+                        <a target="_blank" href="https://apod.nasa.gov/apod/astropix.html">NASA's Astronomy Picture of the Day</a> website. 
+                        </p>
+                        <p class="copyright"><a target="_blank" href="https://github.com/lengstrom/fast-style-transfer.git">Style-transfer code</a> copyright: (c) 2016 Logan Engstrom. Contact Logan for commercial use (email: engstrom at MIT dot edu). Free for research/noncommercial use, as long as proper attribution is given and this copyright notice is retained.
+                        </p>
+                        <p>Enjoy!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="expandModal" tabindex="-1" role="dialog" aria-labelledby="expandModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div id="expandModalBody" class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    <img id="expandedImage" class="expand-image"/>
+                    <ul class="list-inline">
+                        <li><a href="" id="go_to_nasa" title="Open external NASA page" target="_blank"><i class="fa fa-external-link"></i></a></li>
+                        <li><a href="#" id="share_link_fb" class="icoFacebook" title="Share NASA Link on Facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#" id="share_link_tw" class="icoTwitter" title="Share NASA Link on Twitter"><i class="fa fa-twitter"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="resultDlg" tabindex="-1" role="dialog" aria-labelledby="resultDlgLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class='result-section hidden'>
+                        <img class="style-image"/>
+                        <ul class="list-inline">
+                            <li><a href="" class="icoDownload" id="download_styled" title="Download Photo" download="mydownload.png"><i class="fa fa-download"></i></a></li>
+                            <li><a href="#" id="share_styled_fb" class="icoFacebook" title="Share Photo on Facebook"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#" id="share_styled_tw" class="icoTwitter" title="Share Photo on Twitter"><i class="fa fa-twitter"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class='instruction'>Add this style to your photo:</div>
+                    <div id='imageSelectionControls'>
+                    <button type="button" id="closeSource" class="close-source hidden" aria-label="close source image"><i class="fa fa-close"></i></button>
+                    <img class="small-preview" title="Style Image" id="stylePostview"> 
+                    <div class="plus-icon">+</div>
+                    <label class="fileContainer" id="fileContainer" title="Upload Photo">+
+                        <input id="uploadButton" type="file" />
+                    </label>
+                    <img class="small-preview" title="Source Photo" id="preview" />
+                    </div>             
+                    <button id="submitStyle" type="submit" class="btn disabled">Stylize!</button>
+                    <div id="seconds" class=" seconds-hidden seconds">
+                      <div id="bar" class="bar animating"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="tinyMessage" tabindex="-1" role="dialog" aria-labelledby="tinyMessageLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                    <span  id="tinyText" ></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="loader">
+        <div class="sk-spinner sk-spinner-pulse"></div>
+    </div>
+    </div>
+</body>
+</html>
