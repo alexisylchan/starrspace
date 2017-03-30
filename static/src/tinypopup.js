@@ -1,10 +1,16 @@
 (function(global) {
-    function tinyPopup(message) {
+    function tinyPopup(message, timeoutval) {
+        if (typeof timeoutval === 'undefined') {
+            timeoutval = 1000;
+        }
         $("#tinyText").html(message)
         $("#tinyMessage").modal("show");
-        setTimeout(function() {
-            $("#tinyMessage").modal("hide");
-        }, 1000)
+
+        if (timeoutval !== 'never') {
+            setTimeout(function() {
+                $("#tinyMessage").modal("hide");
+            }, timeoutval)
+        }
     }
     global.tinyPopup = tinyPopup;
 })(window);

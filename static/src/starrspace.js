@@ -10,13 +10,12 @@
         debug: debug,
         resultPanel: resultPanel
     });
-
     function handle_results(data) {
         if (!data || data.error) {
             resultPanel.hide();
-            global.tinyPopup('Sorry! An internal error has occurred.')
+            global.tinyPopup('Sorry! An internal error has occurred.');
         } else {
-            resultPanel.setResult(data.root + "/" + data.filename)
+            resultPanel.setResult(data.root + "/" + data.filename);
         }
     }
     function debug_handle_results() {
@@ -40,24 +39,35 @@
         uploadBtn.on('change', function(evt) {
             var files = evt.target.files;
             if (files && files.length > 0) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    // Display upload thumbnail
-                    var baseImgSrc = e.target.result;
-                    resultPanel.setBaseImg(baseImgSrc);
+                if (files[0].type.indexOf('image/')< 0) {
+                    global.tinyPopup('Please upload an image file. Thank you!', 2000);
+                } else if (files[0].size > 5000000) {
+                    global.tinyPopup('Please upload an image file less than 5MB. Thank you!', 2000);
+                } else {
 
-                    // Upload base image to server
-                    var request = new XMLHttpRequest();
-                    request.onload = function(requestResponse) {
-                        resultPanel.clearUpload();
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        // Display upload thumbnail
+                        var baseImgSrc = e.target.result;
+                        resultPanel.setBaseImg(baseImgSrc);
+
+                        // Upload base image to server
+                        var request = new XMLHttpRequest();
+                        request.onload = function(requestResponse) {
+                            var serverResponse = JSON.parse(requestResponse.currentTarget.response);
+                            if (serverResponse.hasOwnProperty('error')) {
+                                global.tinyPopup(serverResponse.error, 'never');                                
+                            }
+                            resultPanel.clearUpload();                
+                        }
+                        request.open("POST", "/upload", true);
+                        var blob = imgUtil.dataURItoBlob(baseImgSrc);
+                        var form = new FormData();
+                        form.append('blob', blob);
+                        request.send(form);
                     }
-                    request.open("POST", "/upload", true);
-                    var blob = imgUtil.dataURItoBlob(baseImgSrc);
-                    var form = new FormData();
-                    form.append('blob', blob);
-                    request.send(form);
+                    reader.readAsDataURL(files[0]);
                 }
-                reader.readAsDataURL(files[0]);
             }
         });
     }
@@ -122,6 +132,11 @@
             $.post('/deletetmp', function(response) {
             });
         });
+        global.addEventListener("beforeunload", function (evt) {
+            // Clear user data on browser close!
+            $.post('/deletetmp', function(response) {
+            });
+        });
     }
 
     function get_nasa_expanded_img_link() {
@@ -156,9 +171,9 @@
         bind_upload();
         bind_stylize();
         bind_share_img();
-        bind_img_dialog();
+        bind_img_dialog();  
+        global.privacyAndTerms();      
     } 
-
     // App entry-point
     function start() {
         pinSource.init(init_page);

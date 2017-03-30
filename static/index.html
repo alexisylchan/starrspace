@@ -34,6 +34,7 @@
     <script src="src/facebookapi.js"></script>
     <script src="src/twitterapi.js"></script>
     <script src="src/tinypopup.js"></script>
+    <script src="src/privacyandterms.js"></script>
     <script src="src/resultpanel.js"></script>
     <script src="src/pin.js"></script>
     <script src="src/layout.js"></script>
@@ -46,7 +47,8 @@
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'apodstyletransfer', 'auto');
+
+    ga('create', 'UA-93752789-1', 'auto');
     ga('send', 'pageview');
     </script>
     <!-- End Google Analytics -->
@@ -157,7 +159,7 @@
                     <img class="small-preview" title="Style Image" id="stylePostview"> 
                     <div class="plus-icon">+</div>
                     <label class="fileContainer" id="fileContainer" title="Upload Photo">+
-                        <input id="uploadButton" type="file" />
+                        <input id="uploadButton" type="file" accept="image/*" />
                     </label>
                     <img class="small-preview" title="Source Photo" id="preview" />
                     </div>             
@@ -177,6 +179,17 @@
                     <span aria-hidden="true">&times;</span>
                     </button>
                     <span  id="tinyText" ></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="privacy-modal modal fade" id="privacyAndTermsAck" tabindex="-1" role="dialog" aria-labelledby="privacyAndTermsAckLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button id="agreeBtn" aria-type="submit" class="btn" data-dismiss="modal" aria-label="Agree">Ok!</button>
+                    <span  id="privacyAndTermsText" >By using this site, you agree to the <a target="_blank" href="/privacy">Privacy Policy</a> and <a target="_blank" href="/terms">Terms of Service</a>.
+                    </span>
                 </div>
             </div>
         </div>
