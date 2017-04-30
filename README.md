@@ -4,8 +4,9 @@
 ![Screenshot](https://cloud.githubusercontent.com/assets/625853/25566637/d1a4ca12-2d91-11e7-83c6-cc41f66b7cfc.png)
 
 For examples of the resulting images, see
-![Starr Space Facebook Page](https://www.facebook.com/starrspaceapp/)
-![Starr Space Twitter Page](https://twitter.com/starrspaceapp)
+https://www.facebook.com/starrspaceapp/
+
+https://twitter.com/starrspaceapp
 
 For style-transfer repository, refer to
-![Fast style transfer](https://github.com/lengstrom/fast-style-transfer/)
+https://github.com/lengstrom/fast-style-transfer/
