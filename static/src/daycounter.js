@@ -1,6 +1,8 @@
 (function(global) {
     var DayCounter = function() {
         var currDate = new Date();
+        this.styled_dates = Object.keys(styleRepo); // Dates which haved had their style precomputed
+        this.styled_index = 0;
         this.year = currDate.getFullYear();
         this.month = currDate.getMonth();
         this.day = currDate.getDate();
@@ -48,11 +50,29 @@
             }
             return this.get_year_str() + '-' + this.get_month_str() + '-' + this.get_day_str();
         },
+        get_next_date: function () {
+
+            if (Math.random() >= 0.4  && this.styled_index < this.styled_dates.length) { // Randomly include styled image 60% of the time
+                next_date = this.styled_dates[this.styled_index];
+                ++this.styled_index;
+                return next_date;
+            } else {
+                while (!this.out_of_dates) {
+                    this.next();
+                    next_date = this.get_date();
+                    if (!this.styled_dates.hasOwnProperty(next_date)) {
+                        return next_date;
+                    }
+                }
+            }
+            return null;
+        },
         next: function() {
             if (this.out_of_dates) {
                 // Early exit if out of dates
                 return;
             }
+
             // Move to the next valid date
             --this.day;
             if (this.day < 1) {

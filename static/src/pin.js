@@ -225,9 +225,8 @@
         var bAddPhotos = (typeof numToFetch !== 'undefined');
         var count = bAddPhotos ? numToFetch : numPins;
 
-        for (var i = 0; i < count; ++i) {
-            dayCounter.next();
-            var nextDate = dayCounter.get_date();
+        for (var i = 0; i < count; ++i) {            
+            var nextDate = dayCounter.get_next_date();
             if (nextDate) {
                 request_img(nextDate);
             } else {

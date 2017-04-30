@@ -41,8 +41,8 @@
             if (files && files.length > 0) {
                 if (files[0].type.indexOf('image/')< 0) {
                     global.tinyPopup('Please upload an image file. Thank you!', 2000);
-                } else if (files[0].size > 5000000) {
-                    global.tinyPopup('Please upload an image file less than 5MB. Thank you!', 2000);
+                } else if (files[0].size > 50000000) {
+                    global.tinyPopup('Please upload an image file less than 50MB. Thank you!', 2000);
                 } else {
 
                     var reader = new FileReader();
